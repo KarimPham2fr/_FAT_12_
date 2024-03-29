@@ -1,3 +1,12 @@
+/*
+ * MENU.h
+ *
+ *  Created on: Mar 05, 2024
+ *      Author: Phong Pham-Thanh
+ *      Email:  Phong.PT.HUST@gmail.com
+ */
+
+
 #ifndef _INC_MENU_
 #define _INC_MENU_
 /*******************************************************************************
@@ -8,11 +17,11 @@
 /*******************************************************************************
  * API
  ******************************************************************************/
- 
+
  /**
  * @brief: Print the contents of a directory.
  * @param[out] pHead_DATA: Pointer to the head of the linked list containing directory contents.
- * @Note: This function prints the contents of a directory, including file names, sizes, types,
+ * @note: This function prints the contents of a directory, including file names, sizes, types,
  * and modification dates and times.
  * @return: None.
  */
@@ -31,4 +40,4 @@ void MENU_printContentOfFile(uint8_t* buff, uint32_t sizeOfFile);
 /******************************************************************************
  * EOF
  *****************************************************************************/
- 
+

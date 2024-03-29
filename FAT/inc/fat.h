@@ -1,3 +1,12 @@
+/*
+ * FAT.h
+ *
+ *  Created on: Mar 03, 2024
+ *      Author: Phong Pham-Thanh
+ *      Email:  Phong.PT.HUST@gmail.com
+ */
+
+
 #ifndef _INC_FAT_
 #define _INC_FAT_
 /*******************************************************************************
@@ -8,10 +17,10 @@
 /*******************************************************************************
  * Defines
  ******************************************************************************/
-#define   true      1
-#define   false     0
-#define   Folder    0x10
-#define   read2sec  511 /*Constant used to check whether 2 sectors in the fat table need to be read.*/
+#define   true                        1
+#define   false                       0
+#define   Folder                      0x10
+#define   read2sec                    511 /*Constant used to check whether 2 sectors in the fat table need to be read.*/
 #define   number_bytes_firstime_read  512
 #define   byte_per_entry              32
 #define   low_byte_sectorSizes        0x0B
@@ -30,10 +39,12 @@
 /*******************************************************************************
  * Typedef & Enums
  ******************************************************************************/
+
  /**
  *@brief: struct stores information parsed from entries in the root.
  **/
-typedef struct {
+typedef struct
+{
     uint16_t BytePerSec; /*Number of bytes in a sector*/
     uint8_t  SecPerClus; /*Number of sector in a cluster*/
     uint16_t RsvdSecCnt; /*Sector number comes before the fat table*/
@@ -43,13 +54,17 @@ typedef struct {
     uint16_t FATSz;      /*Number of sector in a fat table*/
 } boot_sector_struct_t;
 
-typedef struct {
+
+typedef struct
+{
     uint8_t hour;
     uint8_t min;
     uint8_t sec;
 } modify_time_t;
 
-typedef struct {
+
+typedef struct
+{
     uint16_t year;
     uint8_t  month;
     uint8_t  day;
@@ -58,7 +73,8 @@ typedef struct {
  /**
  *@brief: struct stores information about a node in the list.
  **/
-typedef struct entry_struct_t{
+typedef struct entry_struct_t
+{
     uint8_t        fileName[255];
     uint8_t        type[7];
     uint8_t        file_attribute;
@@ -73,7 +89,8 @@ typedef struct entry_struct_t{
 /**
  *@brief: enum defines return codes when processing in fat layer
  **/
-typedef enum {
+typedef enum
+{
     FAT_INIT_SUCCESSFULLY,
     FAT_INIT_UNSUCCESSFULLY,
 } fat_handle_enum_t;
@@ -91,12 +108,14 @@ typedef enum {
  */
 fat_handle_enum_t FAT_Init(const char* file_name);
 
+
 /**
  * @brief: Parse the root directory entries and populate the linked list of entries.
  * @param[in/out] pHead_Entry: Pointer to the head of the linked list where the parsed entries will be stored.
  * @return: None
  */
 void FAT_Parse_Root_Directory(entry_struct_t** pHead_Entry);
+
 
 /**
  * @brief: Read the content of a file from data area and store it in a buffer.
@@ -107,12 +126,14 @@ void FAT_Parse_Root_Directory(entry_struct_t** pHead_Entry);
  */
 uint8_t* FAT_Read_Content_File(uint16_t first_cluster, uint32_t sizeOfFile);
 
+
 /**
  * @brief: Free the linked list of directory entries.
  * @param[in/out] pHead: Pointer to the head of the linked list to be freed.
  * @Note: This function should be called after entering a new directory.
  */
 void FAT_Free_List(entry_struct_t** pHead);
+
 
 /**
  * @brief: Free the memory allocated for file content.
@@ -127,7 +148,6 @@ void FAT_Free_Content(uint8_t* buff);
  * @return: None
  */
 void FAT_Parse_Sub_Directory(entry_struct_t** pHead_Entry, uint16_t first_cluster);
-
 #endif /*_INC_FAT_*/
 /******************************************************************************
  * EOF

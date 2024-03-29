@@ -1,3 +1,12 @@
+/*
+ * MENU.c
+ *
+ *  Created on: Mar 05, 2024
+ *      Author: Phong Pham-Thanh
+ *      Email:  Phong.PT.HUST@gmail.com
+ */
+
+
 /*****************************************************************************
 * Includes
 *****************************************************************************/
@@ -23,6 +32,7 @@ void MENU_printDirec(entry_struct_t* pHead_DATA)
     }
 }
 
+
 void MENU_printContentOfFile(uint8_t* buff, uint32_t sizeOfFile)
 {
     uint32_t index = 0;
@@ -36,4 +46,3 @@ void MENU_printContentOfFile(uint8_t* buff, uint32_t sizeOfFile)
 /*****************************************************************************
 * EOF
 *****************************************************************************/
-

@@ -1,3 +1,12 @@
+/*
+ * APP.h
+ *
+ *  Created on: Mar 01, 2024
+ *      Author: Phong Pham-Thanh
+ *      Email:  Phong.PT.HUST@gmail.com
+ */
+
+
 /*****************************************************************************
 * Includes
 *****************************************************************************/
@@ -22,11 +31,12 @@ handle_file_enum_t HAL_Init(const char* file_name)
     return reVal;
 }
 
+
 handle_file_enum_t HAL_DeInit(const char* file_name)
 {
     handle_file_enum_t reVal = HAL_DEINIT_UNSECCESSFULLY;
     uint8_t status           = 0;
-    
+
     status = fclose(ptr_file);
     if (status == 0)
     {
@@ -35,6 +45,7 @@ handle_file_enum_t HAL_DeInit(const char* file_name)
 
     return reVal;
 }
+
 
 handle_file_enum_t HAL_Update_BytePerSector(uint16_t bytePerSector)
 {
@@ -52,6 +63,7 @@ handle_file_enum_t HAL_Update_BytePerSector(uint16_t bytePerSector)
     return reVal;
 }
 
+
 int32_t HAL_KMC_Read_Sector(uint32_t index, uint8_t *buff)
 {
     size_t reVal = 0;
@@ -66,6 +78,7 @@ int32_t HAL_KMC_Read_Sector(uint32_t index, uint8_t *buff)
 
     return reVal;
 }
+
 
 int32_t HAL_KMC_Read_Multi_Sector(uint32_t index, uint32_t num, uint8_t *buff)
 {
@@ -84,4 +97,3 @@ int32_t HAL_KMC_Read_Multi_Sector(uint32_t index, uint32_t num, uint8_t *buff)
 /*****************************************************************************
 * EOF
 *****************************************************************************/
-

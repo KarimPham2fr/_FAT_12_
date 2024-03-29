@@ -1,3 +1,12 @@
+/*
+ * FAT.c
+ *
+ *  Created on: Mar 03, 2024
+ *      Author: Phong Pham-Thanh
+ *      Email:  Phong.PT.HUST@gmail.com
+ */
+
+
 /*****************************************************************************
 * Includes
 *****************************************************************************/
@@ -8,6 +17,7 @@ static boot_sector_struct_t bootSector;
 /******************************************************************************
  * Function Prototypes
  *****************************************************************************/
+
 /**
  * @brief: Find the next cluster in the FAT table.
  * @param[out] cluster: The current cluster whose next cluster needs to be found.
@@ -56,6 +66,7 @@ static uint16_t findNextCluster(uint16_t cluster)
     return next_cluster;
 }
 
+
 /**
  * @brief: Find the short filename for a file.
  * @param[out] entry: Pointer to the entry in the FAT containing information about the file name.
@@ -77,6 +88,7 @@ static void FAT_SFN(const uint8_t* const entry, uint8_t* const name)
     name[11] = entry[26];
     name[12] = 0;
 }
+
 
 /**
  * @brief: Extracts the long filename from the given buffer and stores it in the name array.
@@ -124,6 +136,7 @@ static void FAT_LFN(uint8_t* const buff, uint8_t* const name, uint8_t numEntryLF
 
 }
 
+
 fat_handle_enum_t FAT_Init(const char* file_name)
 {
     fat_handle_enum_t reVal          = FAT_INIT_UNSUCCESSFULLY;
@@ -154,6 +167,7 @@ fat_handle_enum_t FAT_Init(const char* file_name)
 
     return reVal;
 }
+
 
 void FAT_Parse_Root_Directory(entry_struct_t** pHead_Entry)
 {
@@ -285,6 +299,7 @@ void FAT_Parse_Root_Directory(entry_struct_t** pHead_Entry)
     }
 }
 
+
 void FAT_Parse_Sub_Directory(entry_struct_t** pHead_Entry, uint16_t first_cluster)
 {
     uint16_t cluster      = 0;
@@ -379,6 +394,7 @@ void FAT_Parse_Sub_Directory(entry_struct_t** pHead_Entry, uint16_t first_cluste
     }
 }
 
+
 uint8_t* FAT_Read_Content_File(uint16_t first_cluster, uint32_t sizeOfFile)
 {
     uint8_t* buff    = NULL;
@@ -405,6 +421,7 @@ uint8_t* FAT_Read_Content_File(uint16_t first_cluster, uint32_t sizeOfFile)
     return buff;
 }
 
+
 void FAT_Free_List(entry_struct_t** pHead)
 {
     entry_struct_t* pTemp = NULL;
@@ -417,6 +434,7 @@ void FAT_Free_List(entry_struct_t** pHead)
     }
 }
 
+
 void FAT_Free_Content(uint8_t* buff)
 {
     if (buff != NULL) {
@@ -426,4 +444,3 @@ void FAT_Free_Content(uint8_t* buff)
 /*****************************************************************************
 * EOF
 *****************************************************************************/
-

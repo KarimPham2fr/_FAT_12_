@@ -1,3 +1,12 @@
+/*
+ * APP.c
+ *
+ *  Created on: Mar 04, 2024
+ *      Author: Phong Pham-Thanh
+ *      Email:  Phong.PT.HUST@gmail.com
+ */
+
+
 /*****************************************************************************
 * Includes
 *****************************************************************************/
@@ -15,7 +24,7 @@ void APP_INIT(const char* fileName)
     entry_struct_t* pHead_RD = NULL;
     FAT_Parse_Root_Directory(&pHead_RD);
     /*Print out root directory*/
-    MENU_printDirec(pHead_RD); 
+    MENU_printDirec(pHead_RD);
     pHead_CurrentD = pHead_RD;
 }
 
@@ -23,7 +32,7 @@ void APP_Process_Action(void)
 {
     uint16_t user_choice = 0;
     uint16_t index       = 0;
-    uint8_t  cmd         = 0; 
+    uint8_t  cmd         = 0;
     entry_struct_t* pTemp_CD = NULL;
 
     user_choice = APP_Enter(pHead_CurrentD);
@@ -39,9 +48,9 @@ void APP_Process_Action(void)
         }
         if ((pTemp_CD -> file_attribute) == 0)
         {
-            cmd = OPEN_FILE; 
+            cmd = OPEN_FILE;
         } else {
-            cmd = INTO_FOLDER; 
+            cmd = INTO_FOLDER;
         }
     }
     switch (cmd)
@@ -92,7 +101,7 @@ uint16_t APP_Enter(entry_struct_t *pHead_CD)
     uint8_t length      = 0;
     uint8_t index       = 0;
     uint8_t arrayNumber = true;
-    
+
     printf("\nEnter the STT to open the file or go to a folder\n");
     printf("Enter 0 to return from file\n");
     printf("Enter: ");
